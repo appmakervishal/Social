@@ -1,11 +1,215 @@
-<html>
-<iframe
-    src="https://edurev.in/p/391679/PPT-Drainage"
-    title="Drainage System PPT (Edurev.in)"
-    width="100%"
-    height="600px"
-    frameborder="0"
-    allowfullscreen
-    loading="lazy"
-></iframe>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Presentations - Smart TV Optimized</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for Smart TV and school environment optimization */
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #f0f2f5; /* Light gray background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh; /* Full viewport height */
+            margin: 0;
+            padding: 2.5vh; /* Responsive padding based on viewport height */
+            box-sizing: border-box;
+            font-size: 1.1rem; /* Base font size slightly larger for TVs */
+        }
+        .container {
+            width: 100%;
+            max-width: 1400px; /* Wider max-width for large TV screens */
+            background-color: #ffffff; /* White background for the container */
+            border-radius: 16px; /* Slightly more rounded corners */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); /* More prominent shadow */
+            overflow: hidden;
+            padding: 30px; /* Increased padding */
+            display: flex;
+            flex-direction: column; /* Stack elements vertically by default */
+            gap: 30px; /* Increased space between sections */
+        }
+        @media (min-width: 1024px) { /* Adjust breakpoint for larger screens like TVs */
+            .container {
+                flex-direction: row; /* Side-by-side on larger screens */
+            }
+        }
+        .sidebar {
+            flex: 0 0 300px; /* Wider sidebar for better readability on TV */
+            padding: 20px;
+            background-color: #f9fafb; /* Slightly different background for sidebar */
+            border-radius: 12px;
+            box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.07);
+        }
+        .main-content {
+            flex-grow: 1; /* Take remaining space */
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0; /* Slightly thicker border for visibility */
+            background-color: #e9ecef; /* Placeholder background for iframe area */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Subtle shadow for iframe */
+        }
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        h1 {
+            font-size: 2.5rem; /* Larger main heading */
+            margin-bottom: 1rem;
+            color: #2d3748; /* Darker text */
+        }
+        h2 {
+            font-size: 2rem; /* Larger sidebar heading */
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+        p {
+            font-size: 1.25rem; /* Larger paragraph text */
+            margin-bottom: 1.5rem;
+            color: #4a5568;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 15px; /* Increased space between list items */
+        }
+        a {
+            display: block;
+            padding: 15px 20px; /* Larger padding for bigger buttons */
+            background-color: #3b82f6; /* Blue button background */
+            color: white;
+            text-decoration: none;
+            border-radius: 10px; /* Slightly more rounded buttons */
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease, outline 0.2s ease;
+            text-align: center;
+            font-weight: 700; /* Bolder text */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            outline: none; /* Remove default focus outline */
+        }
+        a:hover {
+            background-color: #2563eb; /* Darker blue on hover */
+            transform: translateY(-3px); /* More pronounced lift effect */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        /* Focus style for remote navigation */
+        a:focus {
+            background-color: #1d4ed8; /* Even darker blue on focus */
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            outline: 4px solid #93c5fd; /* Prominent blue outline for focus */
+            outline-offset: 4px; /* Space between outline and button */
+        }
+        a.active { /* Class for the currently selected presentation */
+            background-color: #10b981; /* Green for active selection */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            outline: 4px solid #6ee7b7;
+            outline-offset: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Select Presentation</h2>
+            <ul class="space-y-4">
+                <li>
+                    <a href="#" data-src="https://edurev.in/p/391679/PPT-Drainage" id="link-drainage">Drainage</a>
+                </li>
+                <li>
+                    <a href="#" data-src="https://edurev.in/p/347362/PPT-Constitutional-Design" id="link-constitutional">Constitutional Design</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">Interactive Presentation Viewer</h1>
+            <p class="text-lg text-gray-600 mb-6 text-center">
+                Use your remote or mouse to select a presentation from the left.
+            </p>
+
+            <div class="iframe-container">
+                <iframe
+                    id="presentationIframe"
+                    src=""
+                    title="Selected Presentation"
+                    allowfullscreen
+                    loading="lazy"
+                ></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get references to the iframe and all the links
+        const presentationIframe = document.getElementById('presentationIframe');
+        const presentationLinks = document.querySelectorAll('.sidebar a');
+
+        // Function to load a presentation into the iframe
+        function loadPresentation(url, activeLinkElement) {
+            presentationIframe.src = url;
+
+            // Remove 'active' class from all links
+            presentationLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Add 'active' class to the clicked/focused link
+            if (activeLinkElement) {
+                activeLinkElement.classList.add('active');
+            }
+        }
+
+        // Add click and focus event listeners to each link
+        presentationLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the default link behavior (navigating away)
+                const url = this.getAttribute('data-src'); // Get the URL from the data-src attribute
+                loadPresentation(url, this); // Load the new URL and mark as active
+            });
+
+            // Add focus event listener for TV remote navigation visual feedback
+            link.addEventListener('focus', function() {
+                // When focused, ensure it has the active styling for visual feedback
+                // Note: The 'active' class is primarily for the selected item,
+                // but for TV, focus also needs strong visual feedback.
+                // The CSS 'a:focus' handles this directly.
+            });
+
+            // Add blur event listener to remove focus styling if needed (though CSS handles it)
+            link.addEventListener('blur', function() {
+                // No specific action needed here if a:focus handles the styling
+            });
+        });
+
+        // Load the first presentation by default when the page loads
+        window.onload = function() {
+            if (presentationLinks.length > 0) {
+                // Programmatically click the first link to load its content and apply active style
+                presentationLinks[0].click();
+                // Ensure the first link is also focused for immediate remote control interaction
+                presentationLinks[0].focus();
+            }
+        };
+    </script>
+</body>
 </html>
+
