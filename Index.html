@@ -3,147 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>School Presentations - Smart TV Optimized</title>
-    <!-- Tailwind CSS CDN for styling -->
+    <title>Secured School Presentations</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom styles for Smart TV and school environment optimization */
+        /* Custom CSS for specific layouts, animations, and TV optimizations */
         body {
             font-family: "Inter", sans-serif;
-            background-color: #f0f2f5; /* Light gray background */
+            background-color: #f0f2f5;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh; /* Full viewport height */
+            min-height: 100vh;
             margin: 0;
-            padding: 2.5vh; /* Responsive padding based on viewport height */
+            padding: 2.5vh;
             box-sizing: border-box;
-            font-size: 1.1rem; /* Base font size slightly larger for TVs */
+            color: #333;
         }
+        /* Login Modal */
+        #loginModal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex; justify-content: center; align-items: center; z-index: 1000;
+        }
+        .login-box {
+            background-color: #fff; padding: 40px; border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); text-align: center;
+            width: 90%; max-width: 450px;
+            transform: scale(0.95); animation: fadeInScale 0.3s ease-out forwards;
+        }
+        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        .login-box input {
+            width: 100%; padding: 15px; margin-bottom: 20px;
+            border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1.1rem;
+            outline: none; transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .login-box input:focus { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3); }
+        .login-box button {
+            width: 100%; padding: 15px; background-color: #3b82f6; color: white;
+            font-size: 1.2rem; font-weight: 700; border-radius: 10px; cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.2);
+        }
+        .login-box button:hover { background-color: #2563eb; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3); }
+        .login-box button:active { transform: translateY(0); box-shadow: 0 2px 5px rgba(59, 130, 246, 0.2); }
+        #loginMessage { margin-top: 15px; min-height: 25px; }
+
+        /* Main Content Container */
         .container {
-            width: 100%;
-            max-width: 1400px; /* Wider max-width for large TV screens */
-            background-color: #ffffff; /* White background for the container */
-            border-radius: 16px; /* Slightly more rounded corners */
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); /* More prominent shadow */
-            overflow: hidden;
-            padding: 30px; /* Increased padding */
-            display: flex;
-            flex-direction: column; /* Stack elements vertically by default */
-            gap: 30px; /* Increased space between sections */
+            width: 100%; max-width: 1400px; background-color: #fff; border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); overflow: hidden; padding: 20px;
+            display: flex; flex-direction: column; gap: 15px;
+            flex-grow: 1; opacity: 0; transition: opacity 0.5s ease;
         }
-        @media (min-width: 1024px) { /* Adjust breakpoint for larger screens like TVs */
-            .container {
-                flex-direction: row; /* Side-by-side on larger screens */
-            }
-        }
-        .sidebar {
-            flex: 0 0 300px; /* Wider sidebar for better readability on TV */
-            padding: 20px;
-            background-color: #f9fafb; /* Slightly different background for sidebar */
-            border-radius: 12px;
-            box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.07);
-        }
-        .main-content {
-            flex-grow: 1; /* Take remaining space */
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .main-view, .projects-view {
+            flex-grow: 1; display: flex; flex-direction: column; align-items: center;
         }
         .iframe-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: 10px;
-            border: 2px solid #e0e0e0; /* Slightly thicker border for visibility */
-            background-color: #e9ecef; /* Placeholder background for iframe area */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Subtle shadow for iframe */
+            position: relative; width: 100%;
+            padding-bottom: 85%; /* Maximized iframe height */
+            height: 0; overflow: hidden; border-radius: 10px;
+            border: 2px solid #e0e0e0; background-color: #e9ecef;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); flex-grow: 1;
         }
-        .iframe-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
+        .iframe-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+        h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; color: #2d3748; text-align: center; }
+        p { font-size: 1.25rem; margin-bottom: 1.5rem; color: #4a5568; text-align: center; }
+
+        /* Bottom Navigation Bar (links as "small boxes") */
+        .bottom-navigation {
+            width: 100%; padding: 10px 0;
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;
+            margin-top: auto;
         }
-        h1 {
-            font-size: 2.5rem; /* Larger main heading */
-            margin-bottom: 1rem;
-            color: #2d3748; /* Darker text */
-        }
-        h2 {
-            font-size: 2rem; /* Larger sidebar heading */
-            margin-bottom: 1rem;
-            color: #2d3748;
-        }
-        p {
-            font-size: 1.25rem; /* Larger paragraph text */
-            margin-bottom: 1.5rem;
-            color: #4a5568;
-        }
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        li {
-            margin-bottom: 15px; /* Increased space between list items */
-        }
-        a {
-            display: block;
-            padding: 15px 20px; /* Larger padding for bigger buttons */
-            background-color: #3b82f6; /* Blue button background */
-            color: white;
-            text-decoration: none;
-            border-radius: 10px; /* Slightly more rounded buttons */
+        .bottom-navigation ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        .bottom-navigation li { margin-bottom: 0; }
+        .bottom-navigation a {
+            display: inline-block; padding: 10px 20px;
+            background-color: #3b82f6; color: white; text-decoration: none;
+            border-radius: 8px; font-weight: 600; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            outline: none; font-size: 1rem;
             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease, outline 0.2s ease;
-            text-align: center;
-            font-weight: 700; /* Bolder text */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-            outline: none; /* Remove default focus outline */
         }
-        a:hover {
-            background-color: #2563eb; /* Darker blue on hover */
-            transform: translateY(-3px); /* More pronounced lift effect */
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        .bottom-navigation a:hover { background-color: #2563eb; transform: translateY(-1px); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); }
+        .bottom-navigation a:focus {
+            background-color: #1d4ed8; transform: translateY(0); box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            outline: 4px solid #93c5fd; outline-offset: 4px;
         }
-        /* Focus style for remote navigation */
-        a:focus {
-            background-color: #1d4ed8; /* Even darker blue on focus */
-            transform: translateY(-1px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            outline: 4px solid #93c5fd; /* Prominent blue outline for focus */
-            outline-offset: 4px; /* Space between outline and button */
+        .bottom-navigation a.active {
+            background-color: #10b981; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            outline: 4px solid #6ee7b7; outline-offset: 4px;
         }
-        a.active { /* Class for the currently selected presentation */
-            background-color: #10b981; /* Green for active selection */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-            outline: 4px solid #6ee7b7;
-            outline-offset: 4px;
+
+        /* Projects View Specific Styles */
+        .projects-view {
+            display: none; /* Hidden by default */
+            max-height: 100%; /* Allow scrolling within the view */
+            overflow-y: auto; /* Enable vertical scrolling */
+            padding-top: 20px;
+        }
+        .projects-view h2 {
+            font-size: 2rem; font-weight: 700; margin-bottom: 1.5rem; color: #2d3748; text-align: center;
+        }
+        .project-list {
+            list-style: none; padding: 0; width: 100%; max-width: 800px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+            gap: 15px; margin-top: 20px;
+        }
+        .project-item {
+            background-color: #f9fafb; padding: 15px; border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .project-item:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12); }
+        .project-item a {
+            font-size: 1.1rem; font-weight: 600; color: #3b82f6; text-decoration: none;
+            display: block; margin-bottom: 5px;
+        }
+        .project-item a:hover { text-decoration: underline; }
+        .project-item p { font-size: 0.9rem; color: #666; margin-bottom: 0; text-align: left; }
+        .project-item p.language { font-size: 0.85rem; color: #888; margin-top: 5px; }
+
+        /* Back Button */
+        .back-button {
+            display: block; width: fit-content; margin: 20px auto 0;
+            padding: 10px 20px; background-color: #ef4444; color: white;
+            border-radius: 8px; text-decoration: none; font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .back-button:hover { background-color: #dc2626; transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); }
+        .back-button:focus { outline: 4px solid #fca5a5; outline-offset: 4px; }
+
+        /* Footer */
+        footer {
+            margin-top: 15px; padding: 10px; text-align: center; font-size: 0.9rem; color: #666;
+            background-color: #e2e8f0; border-radius: 8px;
+            width: 100%; max-width: 1400px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            opacity: 0; transition: opacity 0.5s ease;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="sidebar">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Select Presentation</h2>
-            <ul class="space-y-4">
-                <li>
-                    <a href="#" data-src="https://edurev.in/p/391679/PPT-Drainage" id="link-drainage">Drainage</a>
-                </li>
-                <li>
-                    <a href="#" data-src="https://edurev.in/p/347362/PPT-Constitutional-Design" id="link-constitutional">Constitutional Design</a>
-                </li>
-            </ul>
-        </div>
 
-        <div class="main-content">
+    <!-- Login Modal -->
+    <div id="loginModal">
+        <div class="login-box">
+            <h2 id="welcomeMessage" class="text-2xl font-bold mb-6 text-gray-800">Welcome! Please Log In</h2>
+            <input type="text" id="usernameInput" placeholder="Username" autocomplete="username">
+            <input type="password" id="passwordInput" placeholder="Password" autocomplete="current-password">
+            <p id="loginMessage" class="text-red-500 text-sm"></p>
+            <button id="loginButton">Login</button>
+        </div>
+    </div>
+
+    <!-- Main Content Container (hidden until login) -->
+    <div class="container" id="mainContent">
+        <!-- Presentation Viewer Section -->
+        <div class="main-view" id="presentationView">
             <h1 class="text-3xl font-bold text-gray-800 mb-4">Interactive Presentation Viewer</h1>
-            <p class="text-lg text-gray-600 mb-6 text-center">
-                Use your remote or mouse to select a presentation from the left.
+            <p class="text-lg text-gray-600 mb-6">
+                Select a presentation from the options below to view it here.
             </p>
 
             <div class="iframe-container">
@@ -155,60 +176,217 @@
                     loading="lazy"
                 ></iframe>
             </div>
+            <!-- New button for projects -->
+            <button id="exploreProjectsBtn" class="bottom-navigation a mt-6 bg-purple-600 hover:bg-purple-700 focus:outline-purple-300">
+                Explore My Other Projects
+            </button>
+        </div>
+
+        <!-- Projects View Section (hidden by default) -->
+        <div class="projects-view" id="projectsView">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">My GitHub Projects</h2>
+            <div id="projectsList" class="project-list">
+                <!-- Projects will be loaded here -->
+                <p id="loadingProjects" class="text-gray-500 text-center w-full">Loading projects...</p>
+            </div>
+            <button id="backToPresentationsBtn" class="back-button">Back to Presentations</button>
+        </div>
+
+        <!-- Bottom Navigation Bar (links appear as "small boxes") -->
+        <div class="bottom-navigation">
+            <ul>
+                <li>
+                    <a href="#" data-src="https://edurev.in/p/391679/PPT-Drainage" id="link-drainage">Drainage</a>
+                </li>
+                <li>
+                    <a href="#" data-src="https://edurev.in/p/347362/PPT-Constitutional-Design" id="link-constitutional">Constitutional Design</a>
+                </li>
+            </ul>
         </div>
     </div>
 
-    <script>
-        // Get references to the iframe and all the links
-        const presentationIframe = document.getElementById('presentationIframe');
-        const presentationLinks = document.querySelectorAll('.sidebar a');
+    <!-- Footer (hidden until login) -->
+    <footer id="pageFooter">
+        &copy; <span id="currentYear"></span> All Rights Reserved. Made by Vishal.
+    </footer>
 
-        // Function to load a presentation into the iframe
+    <script>
+        // Get references to elements
+        const loginModal = document.getElementById('loginModal');
+        const usernameInput = document.getElementById('usernameInput');
+        const passwordInput = document.getElementById('passwordInput');
+        const loginButton = document.getElementById('loginButton');
+        const loginMessage = document.getElementById('loginMessage');
+        const welcomeMessage = document.getElementById('welcomeMessage');
+        const mainContent = document.getElementById('mainContent');
+        const pageFooter = document.getElementById('pageFooter');
+
+        const presentationView = document.getElementById('presentationView');
+        const projectsView = document.getElementById('projectsView');
+        const exploreProjectsBtn = document.getElementById('exploreProjectsBtn');
+        const backToPresentationsBtn = document.getElementById('backToPresentationsBtn');
+        const projectsList = document.getElementById('projectsList');
+        const loadingProjects = document.getElementById('loadingProjects');
+
+        const presentationIframe = document.getElementById('presentationIframe');
+        const presentationLinks = document.querySelectorAll('.bottom-navigation a');
+
+        // GitHub username for API
+        const githubUsername = 'appmakervishal';
+
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // --- Speech Synthesis Function ---
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                speechSynthesis.speak(utterance);
+            } else {
+                console.warn("Speech Synthesis not supported in this browser.");
+            }
+        }
+
+        // --- View Management ---
+        function showView(viewId) {
+            presentationView.style.display = 'none';
+            projectsView.style.display = 'none';
+
+            if (viewId === 'presentation') {
+                presentationView.style.display = 'flex';
+            } else if (viewId === 'projects') {
+                projectsView.style.display = 'flex';
+                fetchGitHubProjects(); // Fetch projects when showing this view
+            }
+        }
+
+        // --- GitHub API Integration ---
+        async function fetchGitHubProjects() {
+            loadingProjects.textContent = 'Loading projects...';
+            projectsList.innerHTML = ''; // Clear previous projects
+
+            try {
+                const response = await fetch(`https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=100`);
+                if (!response.ok) {
+                    throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+                }
+                const repos = await response.json();
+
+                if (repos.length === 0) {
+                    loadingProjects.textContent = `No public projects found for ${githubUsername}.`;
+                    return;
+                }
+
+                loadingProjects.style.display = 'none'; // Hide loading message
+                repos.forEach(repo => {
+                    const projectItem = document.createElement('div');
+                    projectItem.className = 'project-item';
+                    projectItem.innerHTML = `
+                        <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a>
+                        <p>${repo.description || 'No description provided.'}</p>
+                        ${repo.language ? `<p class="language">Language: ${repo.language}</p>` : ''}
+                    `;
+                    projectsList.appendChild(projectItem);
+                });
+
+            } catch (error) {
+                console.error("Failed to fetch GitHub projects:", error);
+                loadingProjects.textContent = `Error loading projects: ${error.message}. Please try again later.`;
+                loadingProjects.style.display = 'block'; // Ensure error message is visible
+            }
+        }
+
+
+        // --- Login Logic ---
+        loginButton.addEventListener('click', handleLogin);
+        usernameInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') passwordInput.focus(); });
+        passwordInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleLogin(); });
+
+        function handleLogin() {
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+            const lowerUsername = username.toLowerCase();
+
+            loginMessage.textContent = '';
+            let isAuthenticated = false;
+            let greeting = `Welcome, ${username}!`;
+
+            if (lowerUsername === 'vishal') {
+                if (password === 'ceoveride') {
+                    isAuthenticated = true;
+                    greeting = "Hello my dear aceo of Agni and V.B. universal!";
+                } else {
+                    loginMessage.textContent = "Incorrect password for Vishal.";
+                }
+            } else if (lowerUsername === 'miss') {
+                isAuthenticated = true;
+                greeting = "Hello mam!";
+            } else {
+                const expectedPassword = username + "@vb";
+                if (password === expectedPassword) {
+                    isAuthenticated = true;
+                    if (lowerUsername === 'bharani') {
+                        greeting = "Hello my dear ceo of Agni and V.B. universal!";
+                    } else if (['prithvi', 'lakshan raj', 'bhooshan', 'kasi'].includes(lowerUsername)) {
+                        greeting = "Hello my dear board of director of Agni and V.B. Universal!";
+                    } else {
+                        greeting = `Welcome, ${username}!`;
+                    }
+                } else {
+                    loginMessage.textContent = "Incorrect password.";
+                }
+            }
+
+            if (isAuthenticated) {
+                welcomeMessage.textContent = greeting;
+                speakText(greeting);
+                loginModal.style.opacity = '0';
+                loginModal.style.pointerEvents = 'none';
+                setTimeout(() => {
+                    loginModal.style.display = 'none';
+                    mainContent.style.opacity = '1';
+                    pageFooter.style.opacity = '1';
+                    showView('presentation'); // Show presentation view after login
+                    if (presentationLinks.length > 0) {
+                        presentationLinks[0].click();
+                        presentationLinks[0].focus();
+                    }
+                }, 500);
+            } else if (!loginMessage.textContent) {
+                loginMessage.textContent = "Invalid username or password.";
+            }
+        }
+
+        // --- Presentation Loading Logic ---
         function loadPresentation(url, activeLinkElement) {
             presentationIframe.src = url;
-
-            // Remove 'active' class from all links
-            presentationLinks.forEach(link => {
-                link.classList.remove('active');
-            });
-
-            // Add 'active' class to the clicked/focused link
+            presentationLinks.forEach(link => link.classList.remove('active'));
             if (activeLinkElement) {
                 activeLinkElement.classList.add('active');
             }
         }
 
-        // Add click and focus event listeners to each link
+        // Add click event listeners to presentation links
         presentationLinks.forEach(link => {
-            link.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent the default link behavior (navigating away)
-                const url = this.getAttribute('data-src'); // Get the URL from the data-src attribute
-                loadPresentation(url, this); // Load the new URL and mark as active
-            });
-// Add focus event listener for TV remote navigation visual feedback
-            link.addEventListener('focus', function() {
-                // When focused, ensure it has the active styling for visual feedback
-                // Note: The 'active' class is primarily for the selected item,
-                // but for TV, focus also needs strong visual feedback.
-                // The CSS 'a:focus' handles this directly.
-            });
-
-            // Add blur event listener to remove focus styling if needed (though CSS handles it)
-            link.addEventListener('blur', function() {
-                // No specific action needed here if a:focus handles the styling
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                loadPresentation(e.currentTarget.getAttribute('data-src'), e.currentTarget);
             });
         });
 
-        // Load the first presentation by default when the page loads
-        window.onload = function() {
-            if (presentationLinks.length > 0) {
-                // Programmatically click the first link to load its content and apply active style
-                presentationLinks[0].click();
-                // Ensure the first link is also focused for immediate remote control interaction
-                presentationLinks[0].focus();
-            }
-        };
+        // --- Project Button Event Listeners ---
+        exploreProjectsBtn.addEventListener('click', () => showView('projects'));
+        backToPresentationsBtn.addEventListener('click', () => showView('presentation'));
+
+        // Initial setup: Hide main content and footer until login, hide projects view
+        document.addEventListener('DOMContentLoaded', () => {
+            mainContent.style.opacity = '0';
+            pageFooter.style.opacity = '0';
+            loginModal.style.display = 'flex';
+            presentationView.style.display = 'none'; // Ensure presentation view is hidden initially
+            projectsView.style.display = 'none'; // Ensure projects view is hidden initially
+            usernameInput.focus();
+        });
     </script>
 </body>
 </html>
-
